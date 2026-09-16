@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/AdobeDocs/embedded-release-notes/schemas/request.schema.json",
+  "title": "Embedded release notes request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "products",
+    "deliverables",
+    "year",
+    "month",
+    "slug",
+    "theme",
+    "persona",
+    "release_scope",
+    "include",
+    "exclude",
+    "source_repos",
+    "output_directory"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "status": {
+      "enum": ["intake", "draft", "approved", "generated"]
+    },
+    "products": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/slug" }
+    },
+    "deliverables": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "enum": ["hub", "toast"] }
+    },
+    "year": { "type": "integer", "minimum": 2000, "maximum": 2100 },
+    "month": { "type": "integer", "minimum": 1, "maximum": 12 },
+    "slug": { "$ref": "#/$defs/slug" },
+    "theme": { "type": "string", "minLength": 1 },
+    "persona": { "type": "string", "minLength": 1 },
+    "release_scope": {
+      "enum": ["latest-release", "last-two-releases", "latest-updates", "custom"]
+    },
+    "release_value": { "type": ["string", "null"] },
+    "include": { "$ref": "#/$defs/stringList" },
+    "exclude": { "$ref": "#/$defs/stringList" },
+    "source_repos": { "$ref": "#/$defs/stringList" },
+    "output_directory": {
+      "type": "string",
+      "pattern": "^generated/[a-z0-9]+(?:-[a-z0-9]+)*/[0-9]{4}/[0-9]{2}/[a-z0-9]+(?:-[a-z0-9]+)*/$"
+    },
+    "created_on": { "type": "string", "format": "date" }
+  },
+  "$defs": {
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "stringList": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  }
+}
