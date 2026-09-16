@@ -19,9 +19,11 @@ to prepare embedded release notes with these intake values:
 - Output year: `${input:year:four-digit year}`
 - Output month: `${input:month:month number}`
 - Output slug: `${input:slug:lowercase-kebab-case name}`
+- UI surface: `${input:surface:component surface, defaults to the product for a single-product request}`
 
 First create the request manifest with `scripts/new_request.py`, translating
 comma-separated values into separate command arguments. Then follow the full
 skill workflow. Do not repeat questions answered above, but preserve its draft
-review and final approval gates. Generate files only under the output directory
-recorded in the request manifest.
+review and final approval gates. Generate the full `hub.html` first, then
+derive exactly two illustrated items into `toast.json`, with `action.href`
+pointing back to that hub. Never create a standalone toast HTML file.

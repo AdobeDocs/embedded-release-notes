@@ -45,6 +45,8 @@ class NewRequestTest(unittest.TestCase):
                 "--deliverables",
                 "hub",
                 "toast",
+                "--surface",
+                "ajo-aep",
             )
 
             self.assertEqual(result.returncode, 0, result.stderr)
@@ -58,6 +60,7 @@ class NewRequestTest(unittest.TestCase):
             request = json.loads(request_path.read_text(encoding="utf-8"))
             self.assertEqual(request["products"], ["ajo", "aep"])
             self.assertEqual(request["output_directory"], "generated/ajo-aep/2026/09/loyalty-admin/")
+            self.assertEqual(request["toast"]["surface"], "ajo-aep")
 
     def test_rejects_non_kebab_case_slug(self):
         with tempfile.TemporaryDirectory() as temporary_directory:
@@ -73,6 +76,26 @@ class NewRequestTest(unittest.TestCase):
 
             self.assertNotEqual(result.returncode, 0)
             self.assertIn("lowercase ASCII kebab-case", result.stderr)
+
+    def test_toast_defaults_surface_and_adds_hub(self):
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            result = self.run_script(
+                temporary_directory,
+                "--products",
+                "ajo",
+                "--slug",
+                "general",
+                "--theme",
+                "General",
+                "--deliverables",
+                "toast",
+            )
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+            request_path = Path(temporary_directory) / "requests/ajo/2026/09/general.json"
+            request = json.loads(request_path.read_text(encoding="utf-8"))
+            self.assertEqual(request["toast"]["surface"], "ajo")
+            self.assertEqual(request["deliverables"], ["hub", "toast"])
 
 
 if __name__ == "__main__":

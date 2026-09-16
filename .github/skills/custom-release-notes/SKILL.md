@@ -1,7 +1,7 @@
 ---
 name: custom-release-notes
-description: Generate Custom Release Notes — either a small in-product "toast" popup (2-3 curated entries), a full standalone "what's new" hub page, both together, or a toast built from an already-existing hub page — for one or more Adobe solutions (AJO, AEP, and future apps), through one unified intake: proactively propose the deliverable and detect the product/context from open files (or a wiki/JIRA/SharePoint link or screenshot), ask which of the four deliverable options is wanted, refine by feature include/exclude, pick which release(s)/timeframe it covers, filter by persona (suggested personas, then Generic, then a custom profile), draft content for author review, then a final confirmation before generating the HTML. Sources real release notes from each solution's local Experience League docs repo (~/Documents/GitHub/<slug>.en) — never fabricates content. Use when asked for custom/personalized release notes, an in-product toast/popup, a "what's new" page/hub, or a persona-specific cut of official release notes.
-argument-hint: "request=requests/<product>/<year>/<month>/<slug>.json or product=ajo deliverables=hub,toast theme=loyalty persona=admin"
+description: Generate a standalone HTML release-note hub, then derive a component-facing JSON card for an Adobe UI surface. Collect product, scope, persona, and surface; source only official release notes; require draft and final approval; generate the hub; then update the central toast registry. Use for personalized release notes and in-product what's-new cards.
+argument-hint: "request=requests/<product>/<year>/<month>/<slug>.json or product=ajo surface=ajo theme=loyalty persona=admin"
 ---
 
 # Custom Release Notes
@@ -15,23 +15,27 @@ is defined by `schemas/request.schema.json` at the repository root.
 
 When invoked with inline `key=value` arguments, accept `product` or `products`,
 `deliverables`, `theme`, `persona`, `release_scope`, `release_value`, `include`,
-`exclude`, `year`, `month`, and `slug`. Create the corresponding request with
+`exclude`, `year`, `month`, `slug`, and `surface`. Create the
+corresponding request with
 the repository's `../../../scripts/new_request.py` before sourcing content.
 
 Produces **Custom Release Notes for in-product display**, sourced entirely
 from a solution's real, official release notes (never fabricated) and
 filtered for a specific audience/context. **The workflow below is the
-one intake process for generating this HTML, full stop — it is not a
+one intake process for generating these deliverables, full stop — it is not a
 toast-only path.** It governs both output formats:
 
-- **Toast** — a small in-product popup showing 2-3 curated entries (a
-  feature, a deprecation, a new video, a doc update — see
-  `references/toast-spec.md`).
+- **Release-note card configuration** — one entry in the central `toast.json`
+   registry, consumed and rendered by `<releasenote surface="...">`. It
+   contains exactly two curated entries with icons and an action to the hub
+   (see `references/toast-spec.md` and the sibling
+   `../toast-registry/SKILL.md`).
 - **Hub page** — the larger standalone "what's new" page with three time
   buckets (this month / last month / coming soon — see
   `references/content-model.md` and `references/design-system.md`).
 
-Format is just which template(s) get filled at the end (Step 5) — the
+Format determines whether the hub template, toast registry, or both are
+updated at Step 5. The
 earlier steps are otherwise identical. Step 1 asks directly which
 combination is wanted (hub, toast, both, or a toast built from an existing
 hub) rather than assuming.
@@ -95,19 +99,16 @@ any universal default:
 This choice decides both the format(s) to build and which steps below are in
 play:
 - **Options 1 & 2** run the full workflow below (Steps 1.1 through 5) — for
-  option 1, Step 5 fills both templates; for option 2, only
+   option 1, Step 5 fills the hub template and updates `toast.json`; for option 2, only
   `base-template.html`.
 - **Option 3** skips Steps 2.1-2.3 (theme, refinement, and release scope were
   already decided when the hub was built) — see "Toast-from-an-existing-hub"
   below — then rejoins the normal flow at Step 3.
 - **Option 4** — no fixed path; scope it with the user first.
 
-If the user wants a toast but there's no existing hub page to source it from
-(option 3 doesn't apply) and they don't want a hub file kept either, treat it
-as option 1's full sourcing pipeline but only save the toast HTML at Step 5
-— the full-inventory draft that content-model.md §1 calls for is still built
-internally to pick entries from, it just isn't delivered as its own file
-unless asked.
+If the user wants a toast but there is no existing hub page to source it from,
+use option 1: generate and keep the hub first, then derive the JSON card. A
+toast entry must never reference an internal draft or a missing hub.
 
 ### Step 1.1 — Product
 
@@ -149,9 +150,9 @@ Replaces Steps 2.1-2.3 when the user picked option 3:
    Treat a divergence request as an explicit override into Step 2.3/Step 3,
    not a reason to skip them for real.
 3. Rejoin the normal flow at Step 3 (persona — confirm it matches the hub, or
-   take the override), then Step 4, drafting the 2-3 highest-impact toast
+   take the override), then Step 4, drafting the two highest-impact toast
    entries from that hub's content per `toast-spec.md`.
-4. Step 5 generates only `toast-template.html`.
+4. Confirm the UI surface, then Step 5 updates `toast.json`.
 
 ### Step 2.1 — Theme / Context
 
@@ -191,7 +192,7 @@ marked "(Recommended)"**:
    release directly (a past release, a version number, a specific month).
 
 What this changes per format:
-- **Toast**: this is the pool the 2-3 entries get drawn from — it makes
+- **Toast**: this is the pool the two entries get drawn from — it makes
   concrete the "Freshness" signal in `personalization-signals.md` (previously
   a default "since your last visit" framing; now user-chosen).
 - **Hub page**: the three-bucket structure (`content-model.md` §2) stays
@@ -220,7 +221,7 @@ drives it now, for toast and hub page alike.
 
 Using the scope from Steps 1-3, select and draft candidate entries — same
 gate regardless of format:
-- **Toast**: 2-3 entries, chosen for the highest impact/importance to the
+- **Toast**: exactly two entries, chosen for the highest impact/importance to the
   selected persona within the Step 2.3 release scope — not just the first
   items found in source order. Content isn't limited to shipped features —
   a deprecation notice, a new how-to video, or a documentation update are
@@ -239,33 +240,36 @@ through without this gate just because it's the larger format.
 
 ### Step 5 — Final validation, then generate
 
-Recap in one short message before writing any HTML: product(s)/repo(s)
+Recap in one short message before writing any output: product(s)/repo(s)
 used, which deliverable(s) from Step 1 (hub only / toast only / both / toast
 from an existing hub), release scope (Step 2.3, or the source hub's scope
 for option 3), persona, the final entry list(s) (titles only), and where
 images will come from (`repo-detection.md` step 4 / `toast-spec.md`'s asset
 section). Ask "does this look right to generate?" and wait for explicit
-approval. Once approved, for each deliverable in scope:
-1. Copy `templates/toast-template.html` for a toast,
-   `templates/base-template.html` for a hub page, or both if Step 1's option
-   1 was chosen.
-2. Fill in content, resolve images per the asset-priority order in
+approval. Once approved:
+1. Copy `templates/base-template.html` and fill it with the approved hub
+   content. The hub must exist before deriving a toast entry.
+2. Build the toast entry from the approved hub, matching
+   `schemas/toasts.schema.json`, with ID
+   `<surface>-<release-year>-<release-month>-<slug>`, then use
+   `scripts/toast_registry.py upsert --entry <entry.json>`. Include the card
+   title, exactly two items with icon configuration, and set `action.href` to
+   the request's `<output_directory>/hub.html`. Never generate a toast HTML
+   file.
+3. For a hub, resolve images per the asset-priority order in
    `repo-detection.md` step 4, running `scripts/embed_images.py` against
    whichever folder(s) were used.
-3. Validate against the relevant checklist (`toast-spec.md` or
-   `design-system.md`) for each file generated.
-4. Save each HTML file under the request's versioned output directory:
-   `generated/<product-scope>/<YYYY>/<MM>/<slug>/`. Use `hub.html` and
-   `toast.html` as the canonical filenames. Don't overwrite an existing file
-   without explicit approval. Set the request status to `generated` and state
-   the saved paths back to the user once written.
+4. Validate with `scripts/toast_registry.py validate`,
+   `scripts/release_files.py validate`, and the relevant content checklist.
+5. Save a hub as `generated/<product-scope>/<YYYY>/<MM>/<slug>/hub.html`.
+   Don't overwrite an existing hub without explicit approval. Set the request
+   status to `generated` and report both the hub path and toast ID.
 
 ## Common requests this skill should handle directly
 
 - "Make an in-product toast for [product] about [topic]" → if an existing
-  hub page is meant as the source, Step 1 option 3. Otherwise, run option 1's
-  full sourcing pipeline but save only the toast file at Step 5 (see the note
-  under Step 1) unless the user also wants the hub kept.
+   hub page is meant as the source, Step 1 option 3. Otherwise, run option 1's
+   full sourcing pipeline: generate the hub first, then derive its JSON card.
 - "Make a version of the AJO what's-new page for [role/feature/team]" → the
   same full workflow above, Step 1 option 2 (hub only) — every step still
   applies here, this is not a shortcut path.

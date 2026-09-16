@@ -52,6 +52,7 @@ def build_parser():
     parser.add_argument("--include", action="append", default=[])
     parser.add_argument("--exclude", action="append", default=[])
     parser.add_argument("--source-repo", action="append", default=[])
+    parser.add_argument("--surface", type=slug)
     parser.add_argument("--repo-root", type=Path, default=Path.cwd())
     return parser
 
@@ -66,8 +67,16 @@ def main(argv=None):
         parser.error("--month must be between 1 and 12")
     if args.release_scope in VALUE_SCOPES and not args.release_value:
         parser.error(f"--release-value is required for {args.release_scope}")
-
     products = unique(args.products)
+    deliverables = unique(args.deliverables)
+    if "toast" in deliverables and "hub" not in deliverables:
+        deliverables.insert(0, "hub")
+    surface = args.surface
+    if "toast" in deliverables and not surface:
+        if len(products) == 1:
+            surface = products[0]
+        else:
+            parser.error("--surface is required for multi-product toast requests")
     product_scope = "-".join(products)
     month = f"{args.month:02d}"
     relative_output = Path("generated", product_scope, str(args.year), month, args.slug)
@@ -83,7 +92,7 @@ def main(argv=None):
         "schema_version": 1,
         "status": "intake",
         "products": products,
-        "deliverables": unique(args.deliverables),
+        "deliverables": deliverables,
         "year": args.year,
         "month": args.month,
         "slug": args.slug,
@@ -97,6 +106,8 @@ def main(argv=None):
         "output_directory": f"{relative_output.as_posix()}/",
         "created_on": date.today().isoformat(),
     }
+    if "toast" in request["deliverables"]:
+        request["toast"] = {"surface": surface}
 
     request_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.mkdir(parents=True, exist_ok=True)

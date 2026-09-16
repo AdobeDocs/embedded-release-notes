@@ -63,7 +63,7 @@ marked "(Recommended)"** since none of these is a universal default:
 4. Other (the tool's automatic free-text slot) — a specific named release,
    version, or month, typed directly.
 
-For the toast, this is literally the pool the 2-3 entries are drawn from —
+For the toast, this is literally the pool the two entries are drawn from —
 it's the "Freshness" signal below made explicit and user-chosen instead of
 defaulting silently to "since your last visit." For the hub page, the
 three-bucket structure stays fixed (`content-model.md` §2) — this only

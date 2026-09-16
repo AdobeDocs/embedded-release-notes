@@ -33,7 +33,7 @@ chunks or grep for structure rather than loading the whole file.
 
 `ajo-new-since-last-visit-concept.html` ("Exploration 2 · corner toast, in
 the AI-tooltip's slot") is the real source for the **toast** deliverable —
-see `toast-spec.md` and `templates/toast-template.html`, both distilled from
+see `toast-spec.md` and the central `toast.json` registry, both distilled from
 it. Unlike the hub samples above, this one uses its own blue/neutral palette
 (`--blue:#577CF8`), kept deliberately distinct from the hub's Adobe-red
 system (confirmed with the user, not an oversight).

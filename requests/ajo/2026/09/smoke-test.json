@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "status": "generated",
+  "products": [
+    "ajo"
+  ],
+  "deliverables": [
+    "hub",
+    "toast"
+  ],
+  "year": 2026,
+  "month": 9,
+  "slug": "smoke-test",
+  "theme": "General",
+  "persona": "Generic",
+  "release_scope": "latest-release",
+  "release_value": null,
+  "include": [],
+  "exclude": [],
+  "source_repos": [
+    "Adobe-Enterprise-Docs/journey-optimizer.en"
+  ],
+  "output_directory": "generated/ajo/2026/09/smoke-test/",
+  "created_on": "2026-09-16",
+  "toast": {
+    "surface": "ajo"
+  }
+}
