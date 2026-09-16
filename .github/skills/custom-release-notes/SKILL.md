@@ -1,10 +1,18 @@
 ---
 name: custom-release-notes
-description: Generate a standalone HTML release-note hub, then derive a component-facing JSON card for an Adobe UI surface. Collect product, scope, persona, and surface; source only official release notes; require draft and final approval; generate the hub; then update the central toast registry. Use for personalized release notes and in-product what's-new cards.
+description: Generate and visually review a standalone HTML release-note hub, then derive a component-facing JSON card for an Adobe UI surface. Collect product, scope, persona, and surface; source only official release notes; iterate on an HTML preview; require final approval; publish the hub; then update the central toast registry. Use for personalized release notes and in-product what's-new cards.
 argument-hint: "request=requests/<product>/<year>/<month>/<slug>.json or product=ajo surface=ajo theme=loyalty persona=admin"
 ---
 
 # Custom Release Notes
+
+## Prerequisite
+
+The `embedded-release-notes` repository must be cloned and opened as a VS Code
+workspace folder. Stop and explain this prerequisite if the repository root,
+this skill, `../../../scripts/new_request.py`, or `templates/base-template.html` cannot
+be resolved. Do not attempt to reproduce the workflow from memory outside the
+repository.
 
 ## Invocation variables
 
@@ -35,7 +43,7 @@ toast-only path.** It governs both output formats:
   `references/content-model.md` and `references/design-system.md`).
 
 Format determines whether the hub template, toast registry, or both are
-updated at Step 5. The
+updated at Step 6. The
 earlier steps are otherwise identical. Step 1 asks directly which
 combination is wanted (hub, toast, both, or a toast built from an existing
 hub) rather than assuming.
@@ -64,8 +72,8 @@ contain the actual rules, not just a summary.
 ## Workflow
 
 In order — each step narrows the next, **for every output format and Step 1
-branch**. **Never skip straight to generating HTML** — Steps 4 and 5 are
-review/confirmation gates, not formalities.
+branch**. Never skip the rendered-preview loop: the author reviews an actual
+HTML page before the canonical hub or toast registry is finalized.
 
 ### Step 0 — Proactively propose the deliverable
 
@@ -98,8 +106,8 @@ any universal default:
 
 This choice decides both the format(s) to build and which steps below are in
 play:
-- **Options 1 & 2** run the full workflow below (Steps 1.1 through 5) — for
-   option 1, Step 5 fills the hub template and updates `toast.json`; for option 2, only
+- **Options 1 & 2** run the full workflow below (Steps 1.1 through 6) — for
+   option 1, Step 6 finalizes the hub and updates `toast.json`; for option 2, only
   `base-template.html`.
 - **Option 3** skips Steps 2.1-2.3 (theme, refinement, and release scope were
   already decided when the hub was built) — see "Toast-from-an-existing-hub"
@@ -152,7 +160,7 @@ Replaces Steps 2.1-2.3 when the user picked option 3:
 3. Rejoin the normal flow at Step 3 (persona — confirm it matches the hub, or
    take the override), then Step 4, drafting the two highest-impact toast
    entries from that hub's content per `toast-spec.md`.
-4. Confirm the UI surface, then Step 5 updates `toast.json`.
+4. Confirm the UI surface, then Step 6 updates `toast.json` after final review.
 
 ### Step 2.1 — Theme / Context
 
@@ -217,7 +225,7 @@ tone, and (for hub pages only) whether disclosure boxes/benefit-lines are
 used. There's no separate "level of expertise" question — Persona alone
 drives it now, for toast and hub page alike.
 
-### Step 4 — Draft the content, then get author review
+### Step 4 — Build and display the HTML preview
 
 Using the scope from Steps 1-3, select and draft candidate entries — same
 gate regardless of format:
@@ -231,39 +239,58 @@ gate regardless of format:
 - **Hub page**: the full bucketed content per `content-model.md`, drafted
   the same way — proposed, not silently finalized.
 
-Present the draft to the user explicitly as a draft, and ask them to:
-confirm the scope, adjust it, or hand you a different scope to redraft from.
-Do not treat silence or a vague "ok" as approval to generate — get an
-explicit go-ahead or edit request back. This applies to a hub-page draft
-exactly as much as a toast draft — don't generate a full hub page straight
-through without this gate just because it's the larger format.
+For options 1 and 2, copy `templates/base-template.html`, fill it with the
+selected content, resolve its images, and write a working preview to:
 
-### Step 5 — Final validation, then generate
+```text
+generated/<product-scope>/<YYYY>/<MM>/<slug>/hub.preview.html
+```
 
-Recap in one short message before writing any output: product(s)/repo(s)
-used, which deliverable(s) from Step 1 (hub only / toast only / both / toast
-from an existing hub), release scope (Step 2.3, or the source hub's scope
-for option 3), persona, the final entry list(s) (titles only), and where
-images will come from (`repo-detection.md` step 4 / `toast-spec.md`'s asset
-section). Ask "does this look right to generate?" and wait for explicit
-approval. Once approved:
-1. Copy `templates/base-template.html` and fill it with the approved hub
-   content. The hub must exist before deriving a toast entry.
-2. Build the toast entry from the approved hub, matching
+Open the preview in a browser when browser tools are available. Otherwise,
+provide its exact path so the author can open it. This is a review artifact:
+do not set the request status to `generated`, create the canonical `hub.html`,
+or update `toast.json` yet.
+
+For option 3, open the existing approved hub instead of creating a new preview.
+If the author asks to change that hub, create `hub.preview.html` beside it and
+review the copy; never overwrite the existing canonical hub during review.
+
+### Step 5 — Review the rendered page and revise
+
+After displaying the rendered preview, ask a concrete review question:
+
+> Here is the rendered release note. Would you like to change any content,
+> ordering, images, or presentation?
+
+Apply requested changes directly to `hub.preview.html`, refresh or reopen it,
+and ask again. Continue until the author says there are no more changes. Do
+not derive the two card items during this loop; they must come from the final
+approved HTML.
+
+### Step 6 — Confirm and render final
+
+Recap the product, source repository, scope, persona, deliverables, output
+path, and titles visible in the reviewed preview. Ask:
+
+> Are we ready to render this as final?
+
+Wait for explicit approval. Once approved:
+1. Promote the reviewed preview to
+   `generated/<product-scope>/<YYYY>/<MM>/<slug>/hub.html`. Do not overwrite
+   an existing canonical hub without explicit approval. Remove the temporary
+   `hub.preview.html` after the canonical file is safely written.
+2. Derive exactly two highlighted items automatically from the approved
+   canonical hub. Build the toast entry matching
    `schemas/toasts.schema.json`, with ID
    `<surface>-<release-year>-<release-month>-<slug>`, then use
    `scripts/toast_registry.py upsert --entry <entry.json>`. Include the card
    title, exactly two items with icon configuration, and set `action.href` to
    the request's `<output_directory>/hub.html`. Never generate a toast HTML
    file.
-3. For a hub, resolve images per the asset-priority order in
-   `repo-detection.md` step 4, running `scripts/embed_images.py` against
-   whichever folder(s) were used.
-4. Validate with `scripts/toast_registry.py validate`,
+3. Validate with `scripts/toast_registry.py validate`,
    `scripts/release_files.py validate`, and the relevant content checklist.
-5. Save a hub as `generated/<product-scope>/<YYYY>/<MM>/<slug>/hub.html`.
-   Don't overwrite an existing hub without explicit approval. Set the request
-   status to `generated` and report both the hub path and toast ID.
+4. Set the request status to `generated` and report both the canonical hub
+   path and toast ID.
 
 ## Common requests this skill should handle directly
 

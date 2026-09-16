@@ -23,7 +23,9 @@ to prepare embedded release notes with these intake values:
 
 First create the request manifest with `scripts/new_request.py`, translating
 comma-separated values into separate command arguments. Then follow the full
-skill workflow. Do not repeat questions answered above, but preserve its draft
-review and final approval gates. Generate the full `hub.html` first, then
-derive exactly two illustrated items into `toast.json`, with `action.href`
-pointing back to that hub. Never create a standalone toast HTML file.
+skill workflow. Do not repeat questions answered above. Generate and display
+`hub.preview.html`, offer to revise its content, order, images, or presentation,
+and repeat until the author has no more changes. Ask whether the page is ready
+to render as final before creating `hub.html`. Only then derive exactly two
+illustrated items into `toast.json`, with `action.href` pointing back to that
+hub. Never create a standalone toast HTML file.

@@ -32,6 +32,19 @@ class SkillPackageTest(unittest.TestCase):
         ]
         self.assertEqual(missing, [])
 
+    def test_preview_precedes_final_hub_and_toast(self):
+        skill = (CUSTOM_SKILL_ROOT / "SKILL.md").read_text(encoding="utf-8")
+        preview = skill.index("hub.preview.html")
+        final_confirmation = skill.index("Are we ready to render this as final?")
+        canonical = skill.index(
+            "generated/<product-scope>/<YYYY>/<MM>/<slug>/hub.html",
+            final_confirmation,
+        )
+        toast_update = skill.index("scripts/toast_registry.py upsert", canonical)
+        self.assertLess(preview, final_confirmation)
+        self.assertLess(final_confirmation, canonical)
+        self.assertLess(canonical, toast_update)
+
 
 if __name__ == "__main__":
     unittest.main()

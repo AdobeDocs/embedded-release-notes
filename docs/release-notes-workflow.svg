@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1180" viewBox="0 0 1600 1180">
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#5b5b60"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.10"/>
+    </filter>
+    <style>
+      .title { font: 700 42px Arial, sans-serif; fill: #161616; }
+      .subtitle { font: 400 21px Arial, sans-serif; fill: #5b5b60; }
+      .step { font: 700 22px Arial, sans-serif; fill: #161616; }
+      .body { font: 400 18px Arial, sans-serif; fill: #5b5b60; }
+      .small { font: 700 17px Arial, sans-serif; fill: #ffffff; }
+      .arrow { stroke: #5b5b60; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .loop { stroke: #315efb; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .box { fill: #ffffff; stroke: #d8d8dc; stroke-width: 2; filter: url(#shadow); }
+      .source { fill: #f2efff; stroke: #8174e8; stroke-width: 2; }
+      .preview { fill: #eef4ff; stroke: #315efb; stroke-width: 2; }
+      .final { fill: #eaf7ef; stroke: #23834a; stroke-width: 2; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="1180" fill="#faf9f7"/>
+  <text x="800" y="64" text-anchor="middle" class="title">Flot Custom Release Notes</text>
+  <text x="800" y="100" text-anchor="middle" class="subtitle">Du dépôt local à la carte affichée dans le produit</text>
+
+  <rect x="90" y="150" width="350" height="115" rx="14" class="box"/>
+  <circle cx="130" cy="190" r="20" fill="#161616"/>
+  <text x="130" y="197" text-anchor="middle" class="small">1</text>
+  <text x="165" y="187" class="step">Prérequis</text>
+  <text x="165" y="218" class="body">Cloner et ouvrir le dépôt</text>
+  <text x="165" y="244" class="body">embedded-release-notes dans VS Code</text>
+
+  <rect x="625" y="150" width="350" height="115" rx="14" class="box"/>
+  <circle cx="665" cy="190" r="20" fill="#161616"/>
+  <text x="665" y="197" text-anchor="middle" class="small">2</text>
+  <text x="700" y="187" class="step">Lancement</text>
+  <text x="700" y="218" class="body">/generate-release-notes</text>
+  <text x="700" y="244" class="body">ou /custom-release-notes</text>
+
+  <rect x="1160" y="150" width="350" height="115" rx="14" class="box"/>
+  <circle cx="1200" cy="190" r="20" fill="#161616"/>
+  <text x="1200" y="197" text-anchor="middle" class="small">3</text>
+  <text x="1235" y="187" class="step">Paramètres</text>
+  <text x="1235" y="218" class="body">Produit, thème, période, persona</text>
+  <text x="1235" y="244" class="body">Les options facultatives sont skippables</text>
+
+  <path d="M440 207 H625" class="arrow"/>
+  <path d="M975 207 H1160" class="arrow"/>
+  <path d="M1335 265 V325 H975" class="arrow"/>
+
+  <rect x="625" y="325" width="350" height="125" rx="14" class="source"/>
+  <circle cx="665" cy="365" r="20" fill="#4b3cb7"/>
+  <text x="665" y="372" text-anchor="middle" class="small">4</text>
+  <text x="700" y="362" class="step">Sources officielles</text>
+  <text x="700" y="393" class="body">Détecter ou demander le dépôt local</text>
+  <text x="700" y="419" class="body">Lire les release notes du produit</text>
+
+  <path d="M625 388 H440" class="arrow"/>
+
+  <rect x="90" y="325" width="350" height="125" rx="14" class="source"/>
+  <circle cx="130" cy="365" r="20" fill="#4b3cb7"/>
+  <text x="130" y="372" text-anchor="middle" class="small">5</text>
+  <text x="165" y="362" class="step">Sélection du contenu</text>
+  <text x="165" y="393" class="body">Choisir et adapter les nouveautés</text>
+  <text x="165" y="419" class="body">pertinentes pour le contexte</text>
+
+  <path d="M265 450 V510 H625" class="arrow"/>
+
+  <rect x="625" y="510" width="350" height="125" rx="14" class="preview"/>
+  <circle cx="665" cy="550" r="20" fill="#315efb"/>
+  <text x="665" y="557" text-anchor="middle" class="small">6</text>
+  <text x="700" y="547" class="step">Prévisualisation HTML</text>
+  <text x="700" y="578" class="body">Générer hub.preview.html</text>
+  <text x="700" y="604" class="body">et l’afficher dans le navigateur</text>
+
+  <path d="M975 572 H1160" class="arrow"/>
+
+  <rect x="1160" y="510" width="350" height="125" rx="14" class="preview"/>
+  <circle cx="1200" cy="550" r="20" fill="#315efb"/>
+  <text x="1200" y="557" text-anchor="middle" class="small">7</text>
+  <text x="1235" y="547" class="step">Relecture visuelle</text>
+  <text x="1235" y="578" class="body">Contenu, ordre, images</text>
+  <text x="1235" y="604" class="body">ou présentation à modifier ?</text>
+
+  <path d="M1335 635 V730 H975" class="arrow"/>
+  <path d="M1335 635 V685 H1515 V490 H1335 V510" class="loop"/>
+  <rect x="1450" y="468" width="92" height="34" rx="17" fill="#315efb"/>
+  <text x="1496" y="491" text-anchor="middle" class="small">Oui</text>
+  <text x="1085" y="715" class="body">Non</text>
+
+  <rect x="625" y="730" width="350" height="125" rx="14" class="box"/>
+  <circle cx="665" cy="770" r="20" fill="#161616"/>
+  <text x="665" y="777" text-anchor="middle" class="small">8</text>
+  <text x="700" y="767" class="step">Confirmation finale</text>
+  <text x="700" y="798" class="body">« Prêt à rendre cette version finale ? »</text>
+  <text x="700" y="824" class="body">Validation explicite requise</text>
+
+  <path d="M625 792 H440" class="arrow"/>
+
+  <rect x="90" y="730" width="350" height="125" rx="14" class="final"/>
+  <circle cx="130" cy="770" r="20" fill="#23834a"/>
+  <text x="130" y="777" text-anchor="middle" class="small">9</text>
+  <text x="165" y="767" class="step">HTML final</text>
+  <text x="165" y="798" class="body">Générer le hub.html canonique</text>
+  <text x="165" y="824" class="body">dans le dossier versionné</text>
+
+  <path d="M265 855 V920 H625" class="arrow"/>
+
+  <rect x="625" y="920" width="350" height="125" rx="14" class="final"/>
+  <circle cx="665" cy="960" r="20" fill="#23834a"/>
+  <text x="665" y="967" text-anchor="middle" class="small">10</text>
+  <text x="700" y="957" class="step">Carte intégrée</text>
+  <text x="700" y="988" class="body">Extraire automatiquement 2 nouveautés</text>
+  <text x="700" y="1014" class="body">et mettre à jour toast.json</text>
+
+  <path d="M975 982 H1160" class="arrow"/>
+
+  <rect x="1160" y="920" width="350" height="125" rx="14" class="final"/>
+  <circle cx="1200" cy="960" r="20" fill="#23834a"/>
+  <text x="1200" y="967" text-anchor="middle" class="small">11</text>
+  <text x="1235" y="957" class="step">Validation</text>
+  <text x="1235" y="988" class="body">Vérifier le hub, le JSON</text>
+  <text x="1235" y="1014" class="body">et toutes leurs références</text>
+
+  <text x="800" y="1120" text-anchor="middle" class="subtitle">Résultat : une release note complète et une carte UI synchronisée</text>
+</svg>
