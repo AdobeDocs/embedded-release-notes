@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "status": "generated",
+  "products": [
+    "ajo"
+  ],
+  "deliverables": [
+    "hub",
+    "toast"
+  ],
+  "year": 2026,
+  "month": 9,
+  "slug": "loyalty-marketer",
+  "theme": "Loyalty",
+  "persona": "Marketer",
+  "release_scope": "custom",
+  "release_value": "August and September 2026 releases plus September pre-release items",
+  "include": [
+    "All Loyalty changes released in August and September 2026; September 2026 Loyalty pre-release items"
+  ],
+  "exclude": [
+    "Non-Loyalty Adobe Journey Optimizer categories"
+  ],
+  "source_repos": [
+    "Adobe-Enterprise-Docs/journey-optimizer.en"
+  ],
+  "output_directory": "generated/ajo/2026/09/loyalty-marketer/",
+  "created_on": "2026-09-21",
+  "toast": {
+    "surface": "ajo"
+  }
+}

@@ -2,43 +2,43 @@
   "schema_version": 1,
   "surfaces": {
     "ajo": {
-      "id": "ajo-2026-09-smoke-test",
+      "id": "ajo-2026-09-loyalty-marketer",
       "surface": "ajo",
       "release": {
         "year": 2026,
         "month": 9,
-        "slug": "smoke-test",
-        "label": "September '26 release"
+        "slug": "loyalty-marketer",
+        "label": "September '26 Loyalty updates"
       },
-      "title": "What's new for Journey Optimizer",
+      "title": "What's new for Loyalty",
       "items": [
         {
           "icon": {
-            "name": "journey",
-            "foreground": "#4B3CB7",
-            "background": "#8174E8"
+            "name": "insights",
+            "foreground": "#146C43",
+            "background": "#A8E5C8"
           },
-          "title": "Journey Simulation",
-          "description": "Validate journey logic with simulated profiles and generated events."
+          "title": "Find the next high-impact challenge",
+          "description": "Challenge Opportunities surfaces AI-detected trends and lets you create a targeted challenge with AI."
         },
         {
           "icon": {
-            "name": "optimize",
-            "foreground": "#8D153A",
-            "background": "#ED4776"
+            "name": "coworker",
+            "foreground": "#4B3CB7",
+            "background": "#C4BAFF"
           },
-          "title": "Optimized paths",
-          "description": "Route audiences deterministically with targeting rules in Optimize."
+          "title": "Turn insights into challenges from chat",
+          "description": "Coworker suggests grounded challenge opportunities based on real loyalty program trends."
         }
       ],
       "action": {
         "label": "See what's new",
-        "href": "generated/ajo/2026/09/smoke-test/hub.html"
+        "href": "generated/ajo/2026/09/loyalty-marketer/hub.html"
       },
       "dismiss": {
         "label": "Dismiss"
       },
-      "source_request": "requests/ajo/2026/09/smoke-test.json"
+      "source_request": "requests/ajo/2026/09/loyalty-marketer.json"
     }
   }
 }
