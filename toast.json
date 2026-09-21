@@ -2,8 +2,47 @@
   "schema_version": 1,
   "surfaces": {
     "ajo": {
-      "id": "ajo-2026-09-loyalty-marketer",
+      "id": "ajo-2026-09-smoke-test",
       "surface": "ajo",
+      "release": {
+        "year": 2026,
+        "month": 9,
+        "slug": "smoke-test",
+        "label": "September '26 release"
+      },
+      "title": "What's new for Journey Optimizer",
+      "items": [
+        {
+          "icon": {
+            "name": "journey",
+            "foreground": "#4B3CB7",
+            "background": "#8174E8"
+          },
+          "title": "Journey Simulation",
+          "description": "Validate journey logic with simulated profiles and generated events."
+        },
+        {
+          "icon": {
+            "name": "optimize",
+            "foreground": "#8D153A",
+            "background": "#ED4776"
+          },
+          "title": "Optimized paths",
+          "description": "Route audiences deterministically with targeting rules in Optimize."
+        }
+      ],
+      "action": {
+        "label": "See what's new",
+        "href": "generated/ajo/2026/09/smoke-test/hub.html"
+      },
+      "dismiss": {
+        "label": "Dismiss"
+      },
+      "source_request": "requests/ajo/2026/09/smoke-test.json"
+    },
+    "ajo-loyalty-marketer": {
+      "id": "ajo-loyalty-marketer-2026-09-loyalty-marketer",
+      "surface": "ajo-loyalty-marketer",
       "release": {
         "year": 2026,
         "month": 9,
