@@ -86,4 +86,10 @@ tests/                                Automated validation
 python3 -m unittest discover -s tests -v
 python3 scripts/toast_registry.py validate
 python3 scripts/release_files.py validate
+python3 scripts/hub_links.py check
 ```
+
+Hubs are embedded in product iframes, and many linked sites refuse to be framed.
+Every external `http(s)` link in `generated/` must therefore use
+`target="_blank" rel="noopener noreferrer"`. In-page links such as `#september`
+are ignored. To repair existing hubs, run `python3 scripts/hub_links.py fix`.
