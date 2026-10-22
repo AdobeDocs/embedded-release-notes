@@ -39,6 +39,45 @@
         "label": "Dismiss"
       },
       "source_request": "requests/ajo/2026/09/smoke-test.json"
+    },
+    "ajo-loyalty-marketer": {
+      "id": "ajo-loyalty-marketer-2026-09-loyalty-marketer",
+      "surface": "ajo-loyalty-marketer",
+      "release": {
+        "year": 2026,
+        "month": 9,
+        "slug": "loyalty-marketer",
+        "label": "September '26 Loyalty updates"
+      },
+      "title": "What's new for Loyalty",
+      "items": [
+        {
+          "icon": {
+            "name": "insights",
+            "foreground": "#146C43",
+            "background": "#A8E5C8"
+          },
+          "title": "Find the next high-impact challenge",
+          "description": "Challenge Opportunities surfaces AI-detected trends and lets you create a targeted challenge with AI."
+        },
+        {
+          "icon": {
+            "name": "coworker",
+            "foreground": "#4B3CB7",
+            "background": "#C4BAFF"
+          },
+          "title": "Turn insights into challenges from chat",
+          "description": "Coworker suggests grounded challenge opportunities based on real loyalty program trends."
+        }
+      ],
+      "action": {
+        "label": "See what's new",
+        "href": "generated/ajo/2026/09/loyalty-marketer/hub.html"
+      },
+      "dismiss": {
+        "label": "Dismiss"
+      },
+      "source_request": "requests/ajo/2026/09/loyalty-marketer.json"
     }
   }
 }
