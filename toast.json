@@ -1,25 +1,25 @@
 {
   "schema_version": 1,
   "surfaces": {
-    "ajo": {
-      "id": "ajo-2026-09-smoke-test",
-      "surface": "ajo",
+    "loyalty": {
+      "id": "loyalty-2026-10-loyalty",
+      "surface": "loyalty",
       "release": {
         "year": 2026,
-        "month": 9,
-        "slug": "smoke-test",
-        "label": "September '26 release"
+        "month": 10,
+        "slug": "loyalty",
+        "label": "October '26 Loyalty updates"
       },
-      "title": "What's new for Journey Optimizer",
+      "title": "What's new for Loyalty",
       "items": [
         {
           "icon": {
-            "name": "journey",
-            "foreground": "#4B3CB7",
-            "background": "#8174E8"
+            "name": "insights",
+            "foreground": "#146C43",
+            "background": "#A8E5C8"
           },
-          "title": "Journey Simulation",
-          "description": "Validate journey logic with simulated profiles and generated events."
+          "title": "Find the next high-impact challenge",
+          "description": "Opportunities surfaces AI-detected trends and lets you create a targeted challenge with AI."
         },
         {
           "icon": {
@@ -27,18 +27,18 @@
             "foreground": "#8D153A",
             "background": "#ED4776"
           },
-          "title": "Optimized paths",
-          "description": "Route audiences deterministically with targeting rules in Optimize."
+          "title": "Edit challenges without saving",
+          "description": "Challenge drafts are now saved automatically, so you can publish or generate a journey straight away."
         }
       ],
       "action": {
         "label": "See what's new",
-        "href": "generated/ajo/2026/09/smoke-test/hub.html"
+        "href": "generated/ajo/2026/10/loyalty/hub.html"
       },
       "dismiss": {
         "label": "Dismiss"
       },
-      "source_request": "requests/ajo/2026/09/smoke-test.json"
+      "source_request": "requests/ajo/2026/10/loyalty.json"
     }
   }
 }
