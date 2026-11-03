@@ -14,7 +14,7 @@
       "items": [
         {
           "icon": {
-            "name": "alert",
+            "name": "insights",
             "foreground": "#146C43",
             "background": "#A8E5C8"
           },
@@ -23,7 +23,7 @@
         },
         {
           "icon": {
-            "name": "preview",
+            "name": "journey",
             "foreground": "#8D153A",
             "background": "#ED4776"
           },
