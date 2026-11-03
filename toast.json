@@ -1,6 +1,45 @@
 {
   "schema_version": 1,
   "surfaces": {
+    "journeys": {
+      "id": "journeys-2026-10-journeys",
+      "surface": "journeys",
+      "release": {
+        "year": 2026,
+        "month": 10,
+        "slug": "journeys",
+        "label": "October '26 Journeys updates"
+      },
+      "title": "What's new for Journeys",
+      "items": [
+        {
+          "icon": {
+            "name": "insights",
+            "foreground": "#146C43",
+            "background": "#A8E5C8"
+          },
+          "title": "Get alerted to delivery problems",
+          "description": "Five new journey alerts cover bounce and delivery error rates, Read Audience exports, and event delays (Limited Availability)."
+        },
+        {
+          "icon": {
+            "name": "journey",
+            "foreground": "#8D153A",
+            "background": "#ED4776"
+          },
+          "title": "Preview content right on the canvas",
+          "description": "See a thumbnail of every channel activity and inspect each treatment and variant in fullscreen."
+        }
+      ],
+      "action": {
+        "label": "See what's new",
+        "href": "generated/ajo/2026/10/journeys/hub.html"
+      },
+      "dismiss": {
+        "label": "Dismiss"
+      },
+      "source_request": "requests/ajo/2026/10/journeys.json"
+    },
     "loyalty": {
       "id": "loyalty-2026-10-loyalty",
       "surface": "loyalty",

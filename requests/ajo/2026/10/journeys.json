@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "status": "generated",
+  "products": [
+    "ajo"
+  ],
+  "deliverables": [
+    "hub",
+    "toast"
+  ],
+  "year": 2026,
+  "month": 10,
+  "slug": "journeys",
+  "theme": "Journeys",
+  "persona": "Marketer",
+  "release_scope": "last-two-releases",
+  "release_value": "October and September 2026 releases (Journeys), one tab each",
+  "include": [],
+  "exclude": [],
+  "source_repos": [
+    "Adobe-Enterprise-Docs/journey-optimizer.en"
+  ],
+  "output_directory": "generated/ajo/2026/10/journeys/",
+  "created_on": "2026-11-03",
+  "toast": {
+    "surface": "journeys"
+  }
+}
