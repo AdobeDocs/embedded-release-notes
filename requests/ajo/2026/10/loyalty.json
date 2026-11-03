@@ -12,9 +12,9 @@
   "month": 10,
   "slug": "loyalty",
   "theme": "Loyalty",
-  "persona": "Marketer",
+  "persona": "Generic",
   "release_scope": "custom",
-  "release_value": "October, September and August 2026 releases (Loyalty), plus any Loyalty pre-release items",
+  "release_value": "October, September and August 2026 releases (Loyalty), each in its own tab; no pre-release links",
   "include": [
     "All Loyalty changes released in October, September and August 2026"
   ],
