@@ -70,3 +70,10 @@ Upserting a new release for an occupied surface replaces the previous entry.
 
 Consumers must treat unknown fields as forward-compatible and must render
 nothing when no surface matches.
+## Dismissal
+
+Closing the card (the X or the `dismiss` action) must keep it hidden until the
+next update. The component stores the dismissed entry `id` (for example in
+`localStorage`, keyed by surface) and renders nothing while the stored `id`
+equals the registry `id`. A new release gets a new `id`, so the card shows
+again. The data contract has no field for this behavior.
