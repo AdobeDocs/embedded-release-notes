@@ -136,6 +136,38 @@ class ToastRegistryTest(unittest.TestCase):
             self.assertNotEqual(result.returncode, 0)
             self.assertIn("surface key aep differs from its value", result.stderr)
 
+    def test_item_href_must_point_to_an_anchor_in_the_hub(self):
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            registry = self.create_registry(root)
+            hub = root / "generated/ajo/2026/09/smoke-test/hub.html"
+            hub.write_text('<div id="first-item"></div>', encoding="utf-8")
+            entry = json.loads(FIXTURE.read_text(encoding="utf-8"))
+            base = "generated/ajo/2026/09/smoke-test/hub.html"
+            entry["items"][0]["href"] = f"{base}#first-item"
+            entry_path = root / "entry.json"
+            entry_path.write_text(json.dumps(entry), encoding="utf-8")
+            ok = self.run_script(registry, "upsert", "--entry", str(entry_path))
+            self.assertEqual(ok.returncode, 0, ok.stderr)
+
+            entry["items"][0]["href"] = f"{base}#missing-item"
+            entry_path.write_text(json.dumps(entry), encoding="utf-8")
+            missing = self.run_script(registry, "upsert", "--entry", str(entry_path))
+            self.assertNotEqual(missing.returncode, 0)
+            self.assertIn("anchor #missing-item does not exist", missing.stderr)
+
+            entry["items"][0]["href"] = "generated/ajo/2026/09/other/hub.html#first-item"
+            entry_path.write_text(json.dumps(entry), encoding="utf-8")
+            other = self.run_script(registry, "upsert", "--entry", str(entry_path))
+            self.assertNotEqual(other.returncode, 0)
+            self.assertIn("must point to the same hub", other.stderr)
+
+            entry["items"][0]["href"] = "https://example.com/hub.html#first-item"
+            entry_path.write_text(json.dumps(entry), encoding="utf-8")
+            bad = self.run_script(registry, "upsert", "--entry", str(entry_path))
+            self.assertNotEqual(bad.returncode, 0)
+            self.assertIn("href must be a generated hub.html", bad.stderr)
+
 
 if __name__ == "__main__":
     unittest.main()
