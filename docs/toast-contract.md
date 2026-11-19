@@ -70,6 +70,20 @@ Upserting a new release for an occupied surface replaces the previous entry.
 
 Consumers must treat unknown fields as forward-compatible and must render
 nothing when no surface matches.
+## Item deep links
+
+Each item may carry an optional `href`, such as
+`generated/ajo/2026/10/loyalty/hub.html#autosave-challenge-drafts`. It must
+point to the same hub as `action.href`, plus the `#` id of the matching item in
+that hub (the validator checks that the id exists in the hub).
+
+When a user selects an item, the component opens the release-notes modal with
+that `href` (hash included) as the iframe address instead of `action.href`. The
+hub reads the hash on load: it opens the tab that holds the item, scrolls to it
+and highlights it. When an item has no `href`, or the component does not
+support it yet, the card falls back to `action.href` and the hub opens on its
+first tab. The component must not strip the `#` fragment.
+
 ## Dismissal
 
 Closing the card (the X or the `dismiss` action) must keep it hidden until the

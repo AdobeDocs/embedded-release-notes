@@ -75,6 +75,13 @@ def validate_toast(toast, index):
             for field in ("title", "description"):
                 if not str(item.get(field, "")).strip():
                     errors.append(f"{prefix}.{field} is required")
+            if "href" in item and not re.fullmatch(
+                r"generated/[a-z0-9-]+/[0-9]{4}/[0-9]{2}/[a-z0-9-]+/hub\.html#[a-z0-9]+(?:-[a-z0-9]+)*",
+                str(item["href"]),
+            ):
+                errors.append(
+                    f"{prefix}.href must be a generated hub.html with a #item-id anchor"
+                )
             icon = item.get("icon")
             if not isinstance(icon, dict):
                 errors.append(f"{prefix}.icon must be an object")
@@ -143,8 +150,25 @@ def validate_references(toast, index, repo_root):
         errors.append(
             f"toasts[{index}].action.href must equal source output hub: {expected_href}"
         )
-    if not (repo_root / expected_href).is_file():
+    hub_path = repo_root / expected_href
+    if not hub_path.is_file():
         errors.append(f"toasts[{index}] generated hub does not exist: {expected_href}")
+        return errors
+
+    hub_html = None
+    for item_index, item in enumerate(toast.get("items", [])):
+        href = item.get("href") if isinstance(item, dict) else None
+        if not href:
+            continue
+        prefix = f"toasts[{index}].items[{item_index}]"
+        page, _, anchor = str(href).partition("#")
+        if page != expected_href:
+            errors.append(f"{prefix}.href must point to the same hub: {expected_href}")
+            continue
+        if hub_html is None:
+            hub_html = hub_path.read_text(encoding="utf-8")
+        if not re.search(rf'\bid="{re.escape(anchor)}"', hub_html):
+            errors.append(f"{prefix}.href anchor #{anchor} does not exist in {expected_href}")
     return errors
 
 

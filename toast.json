@@ -58,7 +58,8 @@
             "background": "#A8E5C8"
           },
           "title": "Find the next high-impact challenge",
-          "description": "Opportunities surfaces AI-detected trends and lets you create a targeted challenge with AI."
+          "description": "Opportunities surfaces AI-detected trends and lets you create a targeted challenge with AI.",
+          "href": "generated/ajo/2026/10/loyalty/hub.html#loyalty-opportunities"
         },
         {
           "icon": {
@@ -67,7 +68,8 @@
             "background": "#ED4776"
           },
           "title": "Edit challenges without saving",
-          "description": "Challenge drafts are now saved automatically, so you can publish or generate a journey straight away."
+          "description": "Challenge drafts are now saved automatically, so you can publish or generate a journey straight away.",
+          "href": "generated/ajo/2026/10/loyalty/hub.html#autosave-challenge-drafts"
         }
       ],
       "action": {
