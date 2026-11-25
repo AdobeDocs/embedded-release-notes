@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page d'exemple (français) : Loyalty</title>
+  <style>
+    :root { --red: #eb1000; --ink: #181818; --muted: #5c5c5c; --line: #d7d7d7; --soft: #f5f5f5; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; color: var(--ink); background: #fff;
+      font-family: "Adobe Clean", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 0 24px; }
+    .banner { background: var(--red); color: #fff; padding: 56px 0 48px; }
+    .banner h1 {
+      margin: 0; font-size: clamp(48px, 11vw, 120px); line-height: .95; font-weight: 900;
+      letter-spacing: -.02em; text-transform: uppercase;
+    }
+    .banner p { margin: 20px 0 0; color: #fff; font-size: clamp(20px, 3vw, 32px); font-weight: 700; }
+    nav { border-bottom: 1px solid var(--line); background: var(--soft); }
+    nav .wrap { display: flex; gap: 24px; padding-top: 14px; padding-bottom: 14px; flex-wrap: wrap; }
+    nav a { color: var(--ink); font-weight: 700; text-decoration: none; }
+    nav a:hover { color: var(--red); }
+    section { padding: 40px 0; border-bottom: 1px solid var(--line); }
+    h2 { margin: 0 0 12px; font-size: clamp(24px, 3.4vw, 36px); }
+    p { margin: 0 0 12px; color: var(--muted); font-size: 18px; line-height: 1.6; }
+    .tag {
+      display: inline-block; margin-bottom: 10px; padding: 3px 10px; background: var(--ink); color: #fff;
+      font-size: 13px; font-weight: 700; text-transform: uppercase;
+    }
+    .soon { background: var(--soft); border: 2px dashed var(--muted); padding: 24px; }
+    footer { padding: 28px 0 56px; color: var(--muted); font-size: 14px; }
+  </style>
+</head>
+<body>
+
+  <div class="banner">
+    <div class="wrap">
+      <h1>Page d'exemple</h1>
+      <p>Contenu de test en français</p>
+    </div>
+  </div>
+
+  <nav>
+    <div class="wrap">
+      <a href="#loyalty-opportunities">Octobre</a>
+      <a href="#autosave-challenge-drafts">Sauvegarde automatique</a>
+      <a href="#bientot">Bientôt</a>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <section id="loyalty-opportunities">
+      <span class="tag">Exemple</span>
+      <h2>Trouvez le prochain défi à fort impact</h2>
+      <p>Texte de test en français.</p>
+      <p>Disponible le 30 septembre 2026 (date d'exemple).</p>
+    </section>
+
+    <section id="autosave-challenge-drafts">
+      <span class="tag">Exemple</span>
+      <h2>Modifiez vos défis sans enregistrer</h2>
+      <p>Texte de test en français.</p>
+      <p>Disponible le 1er octobre 2026 (date d'exemple).</p>
+    </section>
+
+    <section id="bientot">
+      <span class="tag">Bientôt</span>
+      <div class="soon">
+        <h2>Bientôt</h2>
+        <p>Rien d'annoncé pour le moment. Cette section est un exemple de contenu de test en français.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">Page d'exemple : ce contenu est factice et sera remplacé par les release notes traduites.</div>
+  </footer>
+
+</body>
+</html>
