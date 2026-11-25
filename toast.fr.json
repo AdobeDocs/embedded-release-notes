@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "surfaces": {
+    "loyalty": {
+      "id": "loyalty-2026-10-loyalty",
+      "surface": "loyalty",
+      "release": {
+        "year": 2026,
+        "month": 10,
+        "slug": "loyalty",
+        "label": "Exemple : nouveautés Loyalty d'octobre '26"
+      },
+      "title": "Exemple : quoi de neuf pour Loyalty",
+      "items": [
+        {
+          "icon": {
+            "name": "insights",
+            "foreground": "#146C43",
+            "background": "#A8E5C8"
+          },
+          "title": "Exemple : trouvez le prochain défi à fort impact",
+          "description": "Texte de test en français.",
+          "href": "generated/ajo/2026/10/loyalty/hub.fr.html#loyalty-opportunities"
+        },
+        {
+          "icon": {
+            "name": "optimize",
+            "foreground": "#8D153A",
+            "background": "#ED4776"
+          },
+          "title": "Exemple : modifiez vos défis sans enregistrer",
+          "description": "Texte de test en français.",
+          "href": "generated/ajo/2026/10/loyalty/hub.fr.html#autosave-challenge-drafts"
+        }
+      ],
+      "action": {
+        "label": "Voir les nouveautés",
+        "href": "generated/ajo/2026/10/loyalty/hub.fr.html"
+      },
+      "dismiss": {
+        "label": "Fermer"
+      },
+      "source_request": "requests/ajo/2026/10/loyalty.json"
+    }
+  }
+}
